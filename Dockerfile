@@ -25,6 +25,10 @@ COPY --from=planner /opt/foundry/recipe.json recipe.json
 RUN cargo chef cook --release --recipe-path recipe.json
 # Up to this point, if our dependency tree stays the same,
 # all layers should be cached.
+
+RUN apt-get update -y && apt-get install -y gcc-aarch64-linux-gnu
+ENV CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc
+ENV CFLAGS=-mno-outline-atomics
 RUN cargo build --release
 
 FROM debian:bookworm-slim AS foundry-environment
@@ -35,7 +39,7 @@ COPY --from=builder /opt/foundry/target/release/cast /usr/local/bin/cast
 COPY --from=builder /opt/foundry/target/release/anvil /usr/local/bin/anvil
 COPY --from=builder /opt/foundry/target/release/chisel /usr/local/bin/chisel
 
-RUN useradd -u 1001 -m foundry
+RUN useradd -u 1000 -m foundry
 
 USER foundry
 
