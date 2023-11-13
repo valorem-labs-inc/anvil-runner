@@ -1,6 +1,6 @@
-FROM debian:bookworm-slim AS foundry-environment
+FROM debian:bookworm-slim AS foundry
 
-RUN apt-get update -y && apt-get install -y linux-headers-generic git curl bash
+RUN apt-get update -y && apt-get install -y git curl bash
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -u 1000 -m foundry
