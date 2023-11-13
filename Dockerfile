@@ -7,7 +7,7 @@ RUN useradd -u 1000 -m foundry
 
 USER foundry
 
-curl -L https://foundry.paradigm.xyz | bash
+RUN curl -L https://foundry.paradigm.xyz | bash
 
 ENTRYPOINT ["/bin/sh", "-c"]
 
