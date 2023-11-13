@@ -1,6 +1,6 @@
-Custom Ubuntu Actions Runner Container
+Anvil runner container
 ======================================
-This container contains our custom anvil runner image for docker 
+This container contains our custom ARM anvil runner image for docker 
 
 Architectures
 -------------
