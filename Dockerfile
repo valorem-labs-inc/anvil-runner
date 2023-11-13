@@ -9,6 +9,7 @@ RUN usermod --shell /bin/bash foundry
 USER foundry
 
 RUN curl -L https://foundry.paradigm.xyz | bash
+RUN foundryup
 
 ENTRYPOINT ["/bin/bash", "-c"]
 
@@ -20,3 +21,4 @@ FROM foundry as anvil
 EXPOSE 8545
 
 ENTRYPOINT ["anvil"]
+f
