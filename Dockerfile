@@ -9,7 +9,7 @@ RUN usermod --shell /bin/bash foundry
 USER foundry
 
 RUN curl -L https://foundry.paradigm.xyz | bash
-RUN foundryup
+RUN /home/foundry/.foundry/bin/foundryup
 
 ENTRYPOINT ["/bin/bash", "-c"]
 
@@ -20,5 +20,4 @@ FROM foundry as anvil
 # Start a clean anvil chain
 EXPOSE 8545
 
-ENTRYPOINT ["anvil"]
-f
+ENTRYPOINT ["/home/foundry/.foundry/bin/anvil"]
