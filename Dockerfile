@@ -20,7 +20,9 @@ COPY --from=planner /opt/foundry /opt/foundry
 # Get the lock-like file
 COPY --from=planner /opt/foundry/recipe.json recipe.json
 
-RUN apt-get update -y && apt-get install -y gcc-aarch64-linux-gnu
+RUN if [[ "$TARGETARCH" = "arm64" ]]; then \
+    apt-get update -y && apt-get install -y gcc-aarch64-linux-gnu; \
+    fi
 
 # Build our project dependencies, not our application!
 RUN cargo chef cook --release --recipe-path recipe.json
@@ -30,7 +32,8 @@ RUN cargo chef cook --release --recipe-path recipe.json
 # Conditional for cross compliation
 RUN if [[ "$TARGETARCH" = "arm64" ]]; then \
     CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc \
-    CFLAGS=-mno-outline-atomics cargo build --release; else cargo build --release; fi
+    CFLAGS=-mno-outline-atomics cargo build --release; else cargo build --release; fi \
+
 # Strip any debug symbols
 RUN strip /opt/foundry/target/release/forge \
     && strip /opt/foundry/target/release/cast \
