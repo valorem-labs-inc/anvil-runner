@@ -20,7 +20,7 @@ COPY --from=planner /opt/foundry /opt/foundry
 # Get the lock-like file
 COPY --from=planner /opt/foundry/recipe.json recipe.json
 
-RUN apt-get update -y && apt-get install -y gcc-aarch64-linux-gnu linux-headers
+RUN apt-get update -y && apt-get install -y gcc-aarch64-linux-gnu linux-headers-generic
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Build our project dependencies, not our application!
@@ -39,7 +39,7 @@ RUN strip /opt/foundry/target/release/forge \
 
 FROM debian:bookworm-slim AS foundry-environment
 
-RUN apt-get update -y && apt-get install -y linux-headers git
+RUN apt-get update -y && apt-get install -y linux-headers-generic git
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Foundry tools
