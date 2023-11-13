@@ -4,7 +4,7 @@ on: pull_request
 
 jobs:
   pre-commit:
-    runs-on: arc-runner-set
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
