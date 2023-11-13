@@ -11,7 +11,7 @@ RUN curl -L https://foundry.paradigm.xyz | bash
 
 ENTRYPOINT ["/bin/sh", "-c"]
 
-FROM foundry-environment as anvil
+FROM foundry as anvil
 
 # At this point we have the entire toolchain for foundry
 
