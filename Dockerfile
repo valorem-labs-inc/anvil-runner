@@ -28,7 +28,7 @@ RUN cargo chef cook --release --recipe-path recipe.json
 # all layers should be cached.
 
 # Conditional for cross compliation
-RUN CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc CFLAGS=-mno-outline-atomics cargo build --release
+RUN CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc CFLAGS=-mno-outline-atomics cargo build --release --bins --target aarch64-unknown-linux-gnu
 
 # Strip any debug symbols
 RUN strip /opt/foundry/target/release/forge \
