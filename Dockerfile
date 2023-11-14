@@ -20,4 +20,4 @@ FROM foundry as anvil
 # Start a clean anvil chain
 EXPOSE 8545
 
-ENTRYPOINT ["anvil --chain-id 31337 --host 0.0.0.0"]
+ENTRYPOINT ["/home/foundry/.foundry/bin/anvil", "--host", "0.0.0.0"]
